@@ -11,19 +11,16 @@ app.listen(app.get("port"), () => {
   console.log(app.get("port"), "번 포트에서 대기중");
 });
 
-app.get("/list", async (req, res) => {
-  try {
-    const pool = await connPool;
-
-    const result = await pool
-      .request()
-      //   .input("A", sql.Numeric, "2")
-      .query(
-        "select top 100 * from tbAdmin with(nolock) order by dtRegDate desc"
-      );
-    res.send(result);
-  } catch (err) {
-    res.status(500);
-    res.send(err.message);
-  }
-});
+// app.get("/list", async (req, res) => {
+//   try {
+//     const pool = await connPool.getConnection((err, conn) => {
+//       if (!err) {
+//         // 연결 성공
+//         const result = conn.query("select * from member");
+//         console.log(result);
+//       } else {
+//         console.log(err);
+//       }
+//     });
+//   } catch {}
+// });

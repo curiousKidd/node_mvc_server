@@ -1,12 +1,12 @@
 const dotenv = require("dotenv");
-const jasypt = require("jasypt");
-const fs = require("fs");
+// const jasypt = require("jasypt");
+// const fs = require("fs");
 
 dotenv.config();
 
 // Jasypt 설정 파일 로드
-const jasyptConfig = fs.readFileSync("./.properties");
-const decryptor = new jasypt({ config: jasyptConfig.toString() });
+// const jasyptConfig = fs.readFileSync("./.properties");
+// const decryptor = new jasypt({ config: jasyptConfig.toString() });
 
 const config = {
   port: process.env.PORT,
@@ -16,11 +16,11 @@ const config = {
     pool: {
       max: 5,
       min: 1,
-      idleTimeoutMillis: 30000,
+      idleTimeoutMillis: 900000,
     },
     options: {
       encrypt: false,
-      datebase: process.env.DB_DEV_DATEBASE,
+      database: process.env.DB_DEV_DATABASE,
       trustServerCertificate: true,
     },
     authentication: {

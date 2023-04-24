@@ -1,14 +1,16 @@
-const sql = require("mssql");
-const { config } = require("./config.js");
+const sql = require("mariadb");
+const { config } = require("./config");
 
-const connPool = new sql.ConnectionPool(config.dbconfig)
-  .connect()
-  .then((pool) => {
-    console.log("DB연결 성공");
-    return pool;
+const connPool = sql.createPool(config.dbconfig);
+
+connPool
+  .getConnection()
+  .then((conn) => {
+    console.log("Connected to MariaDB!");
+    conn.release(); // release to pool
   })
   .catch((err) => {
-    console.log("err ", err);
+    console.log("Failed to connect to MariaDB:", err);
   });
 
 module.exports = { sql, connPool };
